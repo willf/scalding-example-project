@@ -66,7 +66,7 @@ Download the `part-00000` file and check that it contains:
 	hello	1
 	world	2
 
-## Running on your own Hadoop cluster
+## Running locally or Running on your own Hadoop cluster (including locally)
 
 If you are trying to run this on a non-Amazon EMR environment, you may need to edit:
 
@@ -76,6 +76,17 @@ And comment out the Hadoop jar exclusions:
 
     // "hadoop-core-0.20.2.jar", // Provided by Amazon EMR. Delete this line if you're not on EMR
     // "hadoop-tools-0.20.2.jar" // "
+
+And also edit the Dependencies.scala and comment out the 'provided' flag for Hadoop:
+
+val hadoopCore   = "org.apache.hadoop"          % "hadoop-core"           % V.hadoop       % "provided" to
+val hadoopCore   = "org.apache.hadoop"          % "hadoop-core"           % V.hadoop    //   % "provided"
+
+to run locally from sbt,
+
+> run-main com.twitter.scalding.Tool com.reverb.hadoop.scalding.WordCountJob --local --input data/hello.txt --output /tmp/results.txt
+> run-main com.twitter.scalding.Tool com.reverb.hadoop.scalding.WordCountJob --hdfs --input data/hello.txt --output /tmp/results
+
 
 ## Next steps
 

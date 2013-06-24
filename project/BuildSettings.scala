@@ -32,7 +32,7 @@ object BuildSettings {
 
     // Slightly cleaner jar name
     jarName in assembly <<= (name, version) { (name, version) => name + "-" + version + ".jar" },
-    
+
     // Drop these jars
     excludedJars in assembly <<= (fullClasspath in assembly) map { cp =>
       val excludes = Set(
@@ -45,10 +45,10 @@ object BuildSettings {
         "commons-beanutils-1.7.0.jar",      // "
         "hadoop-core-0.20.2.jar", // Provided by Amazon EMR. Delete this line if you're not on EMR
         "hadoop-tools-0.20.2.jar" // "
-      ) 
+      )
       cp filter { jar => excludes(jar.data.getName) }
     },
-    
+
     mergeStrategy in assembly <<= (mergeStrategy in assembly) {
       (old) => {
         case "project.clj" => MergeStrategy.discard // Leiningen build files
