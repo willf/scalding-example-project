@@ -10,7 +10,7 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package com.snowplowanalytics.hadoop.scalding
+package com.reverb.hadoop.scalding
 
 // Scalding
 import com.twitter.scalding._
@@ -21,9 +21,9 @@ class WordCountJob(args : Args) extends Job(args) {
     .groupBy('word) { _.size }
     .write( Tsv( args("output") ) )
 
-  // Split a piece of text into individual words.
+  // Split a piece of text into individual words. non-char based tokens.
   def tokenize(text : String) : Array[String] = {
     // Lowercase each word and remove punctuation.
-    text.toLowerCase.replaceAll("[^a-zA-Z0-9\\s]", "").split("\\s+")
+    text.replaceAll("[^a-zA-Z0-9\\s]", "").split("\\s+")
   }
 }

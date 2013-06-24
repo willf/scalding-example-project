@@ -10,7 +10,7 @@
  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the Apache License Version 2.0 for the specific language governing permissions and limitations there under.
  */
-package com.snowplowanalytics.hadoop.scalding
+package com.reverb.hadoop.scalding
 
 // Specs2
 import org.specs2.mutable.Specification
@@ -20,7 +20,7 @@ import com.twitter.scalding._
 
 class WordCountTest extends Specification with TupleConversions {
   "A WordCount job" should {
-    JobTest("com.snowplowanalytics.hadoop.scalding.WordCountJob").
+    JobTest("com.reverb.hadoop.scalding.WordCountJob").
       arg("input", "inputFile").
       arg("output", "outputFile").
       source(TextLine("inputFile"), List("0" -> "hack hack hack and hack")).
